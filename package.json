@@ -1,0 +1,24 @@
+{
+    "name": "mr-watch",
+    "version": "1.0.0",
+    "devDependencies": {
+        "prettier": "3.2.5",
+        "typescript": "^5.3.3"
+    },
+    "dependencies": {
+        "@keystone-6/core": "^5.7.2",
+        "astro": "^4.4.5",
+        "valibot": "^0.29.0"
+    },
+    "scripts": {
+        "astro:dev": "astro dev",
+        "astro:start": "astro dev",
+        "astro:build": "astro check && astro build",
+        "astro:preview": "astro preview",
+        "astro": "astro",
+        "keystone:dev": "keystone dev",
+        "keystone:start": "keystone start",
+        "keystone:build": "keystone build",
+        "keystone:postinstall": "keystone build --no-ui --frozen"
+    }
+}

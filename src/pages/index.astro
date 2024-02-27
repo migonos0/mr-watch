@@ -1,0 +1,14 @@
+---
+import Layout from '../shared/layouts/Layout.astro';
+import {usePosts} from '../posts/features/find-all/use';
+
+const posts = await usePosts();
+---
+
+<Layout title="Welcome to Astro.">
+    <main>
+        <ul>
+            {posts.map((post) => <li>{post.title}</li>)}
+        </ul>
+    </main>
+</Layout>
