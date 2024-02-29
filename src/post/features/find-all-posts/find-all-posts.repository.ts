@@ -1,5 +1,5 @@
 import {keystoneContext} from '../../../keystone/context';
-import type {Post} from '../../domain/factory';
+import type {Post} from '../../domain/post.factory';
 import {post} from '../../post';
 
 export const keystoneFindAllPostsRepository = (() => ({

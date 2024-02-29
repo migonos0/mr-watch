@@ -1,4 +1,4 @@
-import type {Post} from '../../domain/factory';
+import type {Post} from '../../domain/post.factory';
 
 type MakeDependencies = {
     repository: {findAll: () => Promise<Post[]>};
