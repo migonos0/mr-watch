@@ -1,4 +1,6 @@
+build
+dist
+/media
 node_modules
-.keystone/
-keystone.db
-*.log
+.DS_Store
+.env

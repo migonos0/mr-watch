@@ -1,0 +1,47 @@
+networks:
+  watcher_network:
+
+services:
+  watcher_tinyproxy:
+    build:
+      context: ./docker/tinyproxy
+    image: watcher-tinyproxy
+    container_name: watcher-tinyproxy
+    restart: unless-stopped
+    ports:
+      - 8888:8888
+    environment:
+      - BACKEND_BASE_PATH=${BACKEND_BASE_PATH:?err}
+      - BACKEND_PORT=${BACKEND_PORT:?err}
+      - FRONTEND_PORT=${FRONTEND_PORT:?err}
+      - PORT=${PROXY_PORT:?err}
+      - BASE_URL=${BASE_URL:?err}
+    networks:
+      - watcher_network
+
+  watcher_backend:
+    build:
+      dockerfile: ./Dockerfile
+      target: backend
+    image: watcher-backend
+    container_name: watcher-backend
+    restart: unless-stopped
+    environment:
+      - PORT=${BACKEND_PORT:?err}
+      - BASE_PATH=${BACKEND_BASE_PATH:?err}
+      - DATABASE_URI=${DATABASE_URI:?err}
+      - PAYLOAD_SECRET=${PAYLOAD_SECRET:?err}
+    networks:
+      - watcher_network
+
+  watcher_frontend:
+    build:
+      dockerfile: ./Dockerfile
+      target: frontend
+    image: watcher-frontend
+    container_name: watcher-frontend
+    restart: unless-stopped
+    environment:
+      - PORT=${FRONTEND_PORT:?err}
+    networks:
+      - watcher_network

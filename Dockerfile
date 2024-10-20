@@ -1,6 +1,6 @@
 # use the official Bun image
 # see all versions at https://hub.docker.com/r/oven/bun/tags
-FROM oven/bun:1 AS base
+FROM imbios/bun-node:latest-hydrogen-slim AS base
 WORKDIR /usr/src/app
 
 # install dependencies into temp directory
@@ -8,11 +8,13 @@ WORKDIR /usr/src/app
 FROM base AS install
 RUN mkdir -p /temp/dev
 COPY package.json bun.lockb /temp/dev/
+COPY packages /temp/dev/packages
 RUN cd /temp/dev && bun install --frozen-lockfile
 
 # install with --production (exclude devDependencies)
 RUN mkdir -p /temp/prod
 COPY package.json bun.lockb /temp/prod/
+COPY packages /temp/prod/packages
 RUN cd /temp/prod && bun install --frozen-lockfile --production
 
 # copy node_modules from temp directory
@@ -29,15 +31,15 @@ RUN bun run --filter light build
 # copy production dependencies and source code into final image
 FROM base AS release
 COPY --from=install /temp/prod/node_modules node_modules
-COPY --from=prerelease /usr/src/app/packages .
+COPY --from=prerelease /usr/src/app/packages packages
 COPY --from=prerelease /usr/src/app/package.json .
 
 FROM release AS backend
 EXPOSE 3000
-CMD ["bun", "run", "start"]
+CMD ["bun", "run", "--filter", "dark", "serve"]
 
-FROM base AS frontend
+FROM release AS frontend
 ENV HOST=0.0.0.0
 ENV PORT=4321
 EXPOSE 4321
-CMD [ "bun", "run", "./dist/server/entry.mjs" ]
+CMD [ "bun", "packages/light/dist/server/entry.mjs" ]
