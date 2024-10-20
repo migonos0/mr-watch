@@ -1,0 +1,7 @@
+{
+  "name": "mr-watch",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
