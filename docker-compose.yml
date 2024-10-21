@@ -9,7 +9,7 @@ services:
     container_name: mr-watcher-tinyproxy
     restart: unless-stopped
     ports:
-      - 9988:9988
+      - ${PROXY_PORT:?err}:${PROXY_PORT:?err}
     environment:
       - BACKEND_BASE_PATH=${BACKEND_BASE_PATH:?err}
       - BACKEND_PORT=${BACKEND_PORT:?err}
@@ -32,7 +32,6 @@ services:
       - PORT=${BACKEND_PORT:?err}
       - BASE_PATH=${BACKEND_BASE_PATH:?err}
       - DATABASE_URI=${DATABASE_URI:?err}
-      - PAYLOAD_SECRET=${PAYLOAD_SECRET:?err}
     networks:
       - mr_watcher_network
 
