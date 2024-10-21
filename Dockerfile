@@ -1,6 +1,6 @@
 # use the official Bun image
 # see all versions at https://hub.docker.com/r/oven/bun/tags
-FROM imbios/bun-node:latest-hydrogen-slim AS base
+FROM imbios/bun-node:latest-hydrogen-alpine AS base
 WORKDIR /usr/src/app
 
 # install dependencies into temp directory
@@ -25,7 +25,10 @@ COPY . .
 
 # [optional] tests & build
 ENV NODE_ENV=production
+ARG BACKEND_BASE_PATH
+ENV BASE_PATH=$BACKEND_BASE_PATH
 RUN bun run --filter dark build
+RUN bun run --filter dark postinstall
 RUN bun run --filter light build
 
 # copy production dependencies and source code into final image
@@ -35,11 +38,13 @@ COPY --from=prerelease /usr/src/app/packages packages
 COPY --from=prerelease /usr/src/app/package.json .
 
 FROM release AS backend
+# exposing the default port
 EXPOSE 3000
-CMD ["bun", "run", "--filter", "dark", "serve"]
+CMD ["bun", "run", "--filter", "dark", "start"]
 
 FROM release AS frontend
 ENV HOST=0.0.0.0
+# setting and exposing the default port
 ENV PORT=4321
 EXPOSE 4321
 CMD [ "bun", "packages/light/dist/server/entry.mjs" ]

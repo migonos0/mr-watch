@@ -1,15 +1,15 @@
 networks:
-  watcher_network:
+  mr_watcher_network:
 
 services:
-  watcher_tinyproxy:
+  mr_watcher_tinyproxy:
     build:
       context: ./docker/tinyproxy
-    image: watcher-tinyproxy
-    container_name: watcher-tinyproxy
+    image: mr-watcher-tinyproxy
+    container_name: mr-watcher-tinyproxy
     restart: unless-stopped
     ports:
-      - 8888:8888
+      - 9988:9988
     environment:
       - BACKEND_BASE_PATH=${BACKEND_BASE_PATH:?err}
       - BACKEND_PORT=${BACKEND_PORT:?err}
@@ -17,14 +17,16 @@ services:
       - PORT=${PROXY_PORT:?err}
       - BASE_URL=${BASE_URL:?err}
     networks:
-      - watcher_network
+      - mr_watcher_network
 
-  watcher_backend:
+  mr_watcher_backend:
     build:
       dockerfile: ./Dockerfile
       target: backend
-    image: watcher-backend
-    container_name: watcher-backend
+      args:
+        - BACKEND_BASE_PATH=${BACKEND_BASE_PATH:?err}
+    image: mr-watcher-backend
+    container_name: mr-watcher-backend
     restart: unless-stopped
     environment:
       - PORT=${BACKEND_PORT:?err}
@@ -32,16 +34,16 @@ services:
       - DATABASE_URI=${DATABASE_URI:?err}
       - PAYLOAD_SECRET=${PAYLOAD_SECRET:?err}
     networks:
-      - watcher_network
+      - mr_watcher_network
 
-  watcher_frontend:
+  mr_watcher_frontend:
     build:
       dockerfile: ./Dockerfile
       target: frontend
-    image: watcher-frontend
-    container_name: watcher-frontend
+    image: mr-watcher-frontend
+    container_name: mr-watcher-frontend
     restart: unless-stopped
     environment:
       - PORT=${FRONTEND_PORT:?err}
     networks:
-      - watcher_network
+      - mr_watcher_network
