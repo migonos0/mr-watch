@@ -14,6 +14,8 @@ import { lists } from "./schema";
 // when you write your list-level access control functions, as they typically rely on session data
 import { withAuth, session } from "./auth";
 
+const BASE_PATH = process.env.BASE_PATH ? `/${process.env.BASE_PATH}` : "";
+
 export default withAuth(
   config({
     db: {
@@ -26,9 +28,9 @@ export default withAuth(
     lists,
     session,
     ui: {
-      basePath: `/${process.env.BASE_PATH}/ui`,
+      basePath: `${BASE_PATH}/ui`,
     },
-    graphql: { path: `/${process.env.BASE_PATH}/api/graphql` },
+    graphql: { path: `${BASE_PATH}/api/graphql` },
     server: {
       port: Number(process.env.PORT) || 3000,
     },
