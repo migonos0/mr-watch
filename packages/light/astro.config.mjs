@@ -13,5 +13,5 @@ export default defineConfig({
     mode: "standalone",
   }),
 
-  integrations: [tailwind()],
+  integrations: [tailwind({ applyBaseStyles: false })],
 });

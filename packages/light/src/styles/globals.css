@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    --primary: rgb(142 73 87);
+    --surface-tint: rgb(142 73 87);
+    --on-primary: rgb(255 255 255);
+    --primary-container: rgb(255 217 222);
+    --on-primary-container: rgb(58 7 22);
+    --secondary: rgb(61 95 144);
+    --on-secondary: rgb(255 255 255);
+    --secondary-container: rgb(213 227 255);
+    --on-secondary-container: rgb(0 28 59);
+    --tertiary: rgb(28 101 133);
+    --on-tertiary: rgb(255 255 255);
+    --tertiary-container: rgb(195 231 255);
+    --on-tertiary-container: rgb(0 30 44);
+    --error: rgb(186 26 26);
+    --on-error: rgb(255 255 255);
+    --error-container: rgb(255 218 214);
+    --on-error-container: rgb(65 0 2);
+    --background: rgb(255 248 247);
+    --on-background: rgb(34 25 27);
+    --surface: rgb(255 248 247);
+    --on-surface: rgb(34 25 27);
+    --surface-variant: rgb(243 221 223);
+    --on-surface-variant: rgb(82 67 69);
+    --outline: rgb(132 115 117);
+    --outline-variant: rgb(214 194 196);
+    --shadow: rgb(0 0 0);
+    --scrim: rgb(0 0 0);
+    --inverse-surface: rgb(56 46 47);
+    --inverse-on-surface: rgb(254 237 238);
+    --inverse-primary: rgb(255 178 190);
+    --primary-fixed: rgb(255 217 222);
+    --on-primary-fixed: rgb(58 7 22);
+    --primary-fixed-dim: rgb(255 178 190);
+    --on-primary-fixed-variant: rgb(113 51 64);
+    --secondary-fixed: rgb(213 227 255);
+    --on-secondary-fixed: rgb(0 28 59);
+    --secondary-fixed-dim: rgb(166 200 255);
+    --on-secondary-fixed-variant: rgb(35 71 118);
+    --tertiary-fixed: rgb(195 231 255);
+    --on-tertiary-fixed: rgb(0 30 44);
+    --tertiary-fixed-dim: rgb(143 206 243);
+    --on-tertiary-fixed-variant: rgb(0 76 105);
+    --surface-dim: rgb(231 214 215);
+    --surface-bright: rgb(255 248 247);
+    --surface-container-lowest: rgb(255 255 255);
+    --surface-container-low: rgb(255 240 241);
+    --surface-container: rgb(251 234 235);
+    --surface-container-high: rgb(245 228 229);
+    --surface-container-highest: rgb(240 222 224);
+
+    --radius: 0.5rem;
+  }
+  .dark {
+    --primary: rgb(255 178 190);
+    --surface-tint: rgb(255 178 190);
+    --on-primary: rgb(86 29 42);
+    --primary-container: rgb(113 51 64);
+    --on-primary-container: rgb(255 217 222);
+    --secondary: rgb(166 200 255);
+    --on-secondary: rgb(3 48 95);
+    --secondary-container: rgb(35 71 118);
+    --on-secondary-container: rgb(213 227 255);
+    --tertiary: rgb(143 206 243);
+    --on-tertiary: rgb(0 53 73);
+    --tertiary-container: rgb(0 76 105);
+    --on-tertiary-container: rgb(195 231 255);
+    --error: rgb(255 180 171);
+    --on-error: rgb(105 0 5);
+    --error-container: rgb(147 0 10);
+    --on-error-container: rgb(255 218 214);
+    --background: rgb(25 17 18);
+    --on-background: rgb(240 222 224);
+    --surface: rgb(25 17 18);
+    --on-surface: rgb(240 222 224);
+    --surface-variant: rgb(82 67 69);
+    --on-surface-variant: rgb(214 194 196);
+    --outline: rgb(159 140 142);
+    --outline-variant: rgb(82 67 69);
+    --shadow: rgb(0 0 0);
+    --scrim: rgb(0 0 0);
+    --inverse-surface: rgb(240 222 224);
+    --inverse-on-surface: rgb(56 46 47);
+    --inverse-primary: rgb(142 73 87);
+    --primary-fixed: rgb(255 217 222);
+    --on-primary-fixed: rgb(58 7 22);
+    --primary-fixed-dim: rgb(255 178 190);
+    --on-primary-fixed-variant: rgb(113 51 64);
+    --secondary-fixed: rgb(213 227 255);
+    --on-secondary-fixed: rgb(0 28 59);
+    --secondary-fixed-dim: rgb(166 200 255);
+    --on-secondary-fixed-variant: rgb(35 71 118);
+    --tertiary-fixed: rgb(195 231 255);
+    --on-tertiary-fixed: rgb(0 30 44);
+    --tertiary-fixed-dim: rgb(143 206 243);
+    --on-tertiary-fixed-variant: rgb(0 76 105);
+    --surface-dim: rgb(25 17 18);
+    --surface-bright: rgb(65 55 56);
+    --surface-container-lowest: rgb(20 12 13);
+    --surface-container-low: rgb(34 25 27);
+    --surface-container: rgb(38 29 31);
+    --surface-container-high: rgb(49 40 41);
+    --surface-container-highest: rgb(60 50 51);
+  }
+}
+@layer base {
+  * {
+    @apply border-outline;
+  }
+  body {
+    @apply bg-background text-on-background;
+  }
+}
